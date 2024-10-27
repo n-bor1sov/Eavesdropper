@@ -1,0 +1,216 @@
+1
+00:00:00,129 --> 00:00:20,669
+[SPEAKER_00]: And today, as Jim proved to us, without talking about artificial intelligence and large language models, I typically say artificial intelligence is autocorrect on steroids because all a large language model does is it predicts what's the most likely next word that you're going to use and then it extrapolates from there.
+
+2
+00:00:21,149 --> 00:00:22,671
+[SPEAKER_00]: So not really very intelligent.
+
+3
+00:00:23,531 --> 00:00:29,733
+[SPEAKER_00]: Obviously, the impact that it has on our lives and on the reality we live in is significant.
+
+4
+00:00:30,433 --> 00:00:37,055
+[SPEAKER_00]: Do you think we will see LLM written code that is submitted to you as a progress?
+
+5
+00:00:37,315 --> 00:00:39,736
+[SPEAKER_01]: I'm convinced it's going to happen, yes.
+
+6
+00:00:40,836 --> 00:00:50,218
+[SPEAKER_01]: And it may well be happening already, maybe on a smaller scale where people really use it more as a help in writing code.
+
+7
+00:00:53,334 --> 00:00:58,600
+[SPEAKER_01]: It's clearly something where automation has always helped people write code.
+
+8
+00:00:58,720 --> 00:01:00,682
+[SPEAKER_01]: I mean, this is not anything new at all.
+
+9
+00:01:01,923 --> 00:01:04,987
+[SPEAKER_01]: We don't write machine code anymore.
+
+10
+00:01:05,087 --> 00:01:06,528
+[SPEAKER_01]: We don't even write assembler.
+
+11
+00:01:06,688 --> 00:01:08,791
+[SPEAKER_01]: And now we're moving on from C to Rust.
+
+12
+00:01:09,752 --> 00:01:12,755
+[SPEAKER_01]: So I don't see this as something
+
+13
+00:01:15,146 --> 00:01:20,628
+[SPEAKER_01]: as revolutionary as all the news talk is every day about AI.
+
+14
+00:01:21,048 --> 00:01:24,029
+[SPEAKER_01]: It's not an area I obviously work with.
+
+15
+00:01:24,609 --> 00:01:25,909
+[SPEAKER_01]: I'm still very low level.
+
+16
+00:01:26,490 --> 00:01:29,931
+[SPEAKER_01]: I got into kernels because I love the low level hardware details.
+
+17
+00:01:31,391 --> 00:01:32,232
+[SPEAKER_01]: why I'm still there.
+
+18
+00:01:33,012 --> 00:01:52,848
+[SPEAKER_00]: But so you say you expect this can help people write code, this can help people get started, but then if we look at the previous conversation and the challenges around code reviews and maintaining, so do you think that large language models will get to the point that they can help us review code, that they can help maintain subsistence?
+
+19
+00:01:52,928 --> 00:01:57,552
+[SPEAKER_01]: I hope, I hope because that's certainly one of the areas where
+
+20
+00:01:58,852 --> 00:02:08,134
+[SPEAKER_01]: which I see them really being able to shine to find the obvious stupid bugs, because I mean, how many of people here are actually programmers in this room?
+
+21
+00:02:09,595 --> 00:02:11,115
+[SPEAKER_01]: So a fair number.
+
+22
+00:02:11,795 --> 00:02:19,578
+[SPEAKER_01]: A lot of the bugs I've read, right, a lot of the bugs I see other people write, they're not like subtle bugs.
+
+23
+00:02:20,138 --> 00:02:24,819
+[SPEAKER_01]: A lot of them are just the stupid bugs that you did not think about, and you don't need
+
+24
+00:02:26,184 --> 00:02:28,926
+[SPEAKER_01]: any kind of higher intelligence to find them.
+
+25
+00:02:29,666 --> 00:02:49,078
+[SPEAKER_01]: But having tools that warn, I mean, we have compilers that warn about the really obvious ones, but having LLMs that warn about slightly more subtle cases where it may just say, this pattern does not look like the regular pattern.
+
+26
+00:02:49,158 --> 00:02:50,579
+[SPEAKER_01]: Are you sure this is what you mean?
+
+27
+00:02:51,714 --> 00:02:54,776
+[SPEAKER_01]: And the answer may be, no, that was not at all what I meant.
+
+28
+00:02:55,277 --> 00:02:56,498
+[SPEAKER_01]: You found an obvious bug.
+
+29
+00:02:56,598 --> 00:02:57,398
+[SPEAKER_01]: Thank you very much.
+
+30
+00:02:58,139 --> 00:03:09,387
+[SPEAKER_01]: So I do think that LLMs are going to be a big, you call them disparagingly, like auto-corrects on steroids.
+
+31
+00:03:09,867 --> 00:03:18,233
+[SPEAKER_01]: And I actually think that they're way more than that and how most people work is we all are.
+
+32
+00:03:18,965 --> 00:03:21,547
+[SPEAKER_01]: auto-corrects on steroids to some degree.
+
+33
+00:03:22,968 --> 00:03:27,112
+[SPEAKER_01]: And I see that as a tool that can help us be better at what we do.
+
+34
+00:03:27,552 --> 00:03:29,094
+[SPEAKER_01]: But I've always been optimistic.
+
+35
+00:03:29,174 --> 00:03:31,115
+[SPEAKER_01]: The whole... Hopeful.
+
+36
+00:03:31,335 --> 00:03:32,797
+[SPEAKER_01]: Hopeful was the word you had.
+
+37
+00:03:32,817 --> 00:03:33,537
+[SPEAKER_00]: Yes, yes.
+
+38
+00:03:33,577 --> 00:03:34,878
+[SPEAKER_00]: Helpful, hopeful and humble.
+
+39
+00:03:35,379 --> 00:03:37,420
+[SPEAKER_01]: Hopeful and humble, that's my middle name.
+
+40
+00:03:38,822 --> 00:03:38,982
+[SPEAKER_01]: But...
+
+41
+00:03:42,560 --> 00:03:50,006
+[SPEAKER_01]: On the other hand, I mean, I have been so optimistic that 32 years ago I was stupid enough to think that you can write a better kernel than anybody else.
+
+42
+00:03:50,466 --> 00:03:56,752
+[SPEAKER_01]: So you have to kind of be a bit too optimistic at times to make a difference.
+
+43
+00:03:57,252 --> 00:04:03,217
+[SPEAKER_01]: So my approach to OOMs really has to be that, hey, this is wonderful.
+
+44
+00:04:03,597 --> 00:04:04,478
+[SPEAKER_01]: This is going to
+
+45
+00:04:05,552 --> 00:04:06,792
+[SPEAKER_00]: I love seeing the optimism.
+
+46
+00:04:07,112 --> 00:04:08,393
+[SPEAKER_00]: I don't necessarily share it.
+
+47
+00:04:08,673 --> 00:04:10,273
+[SPEAKER_01]: No, a lot of people disagree with it.
+
+48
+00:04:10,293 --> 00:04:14,634
+[SPEAKER_00]: But one of the things that I worry about in all this is we see the hallucinations.
+
+49
+00:04:14,774 --> 00:04:20,356
+[SPEAKER_00]: We see, and that's a technical term for LLMs, they do hallucinate and they do makeup stuff.
+
+50
+00:04:20,776 --> 00:04:33,179
+[SPEAKER_00]: And so the more they are being put into the position where they will automatically do things without an actual human being there to catch them, the more this becomes scary.
+
+51
+00:04:33,775 --> 00:04:45,446
+[SPEAKER_00]: not as curious and they will rule the world and not in the sci-fi sense, but in the so many bugs that will happen and that will affect our lives or our code.
+
+52
+00:04:46,207 --> 00:04:51,813
+[SPEAKER_01]: Well, I see the bugs that happen without them every day, so that may be why I'm not so worried.
+
+53
+00:04:51,973 --> 00:04:55,076
+[SPEAKER_01]: I think we're doing those just fine on our own.
+
+54
+00:04:57,490 --> 00:05:04,915
+[SPEAKER_00]: And I don't think I can end the AI topic on a better highlight, so let's go from there to...
+
