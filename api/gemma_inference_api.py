@@ -1,8 +1,9 @@
 from flask import Flask, request, jsonify
 from threading import Thread
 from queue import Queue
-
+import sys
 import torch
+import os
 
 app = Flask(__name__)
 
@@ -16,9 +17,9 @@ CONFIG = VARIANT[:2]
 if CONFIG == '2b':
     CONFIG = '2b-v2'
     
-weights_dir = "../models/gemma-2-pytorch-gemma-2-2b-it-v1/"
+weights_dir = "models/gemma-2-pytorch-gemma-2-2b-it-v1/"
 
-import os
+
 # Ensure that the tokenizer is present
 tokenizer_path = os.path.join(weights_dir, 'tokenizer.model')
 assert os.path.isfile(tokenizer_path), 'Tokenizer not found!'
@@ -27,9 +28,9 @@ assert os.path.isfile(tokenizer_path), 'Tokenizer not found!'
 ckpt_path = os.path.join(weights_dir, f'model.ckpt')
 assert os.path.isfile(ckpt_path), 'PyTorch checkpoint not found!'
 
+# print(os.getcwd())
+sys.path.append('api/gemma_pytorch')
 
-import sys
-sys.path.append('gemma_pytorch/gemma')
 from gemma.config import GemmaConfig, get_model_config
 from gemma.model import GemmaForCausalLM
 from gemma.tokenizer import Tokenizer
