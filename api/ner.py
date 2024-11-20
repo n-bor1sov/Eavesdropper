@@ -7,11 +7,10 @@ app = FastAPI()
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 with open('./models/label_map.pickle', 'rb') as f:
-    idx_to_label = pickle.load(f)
+    label_to_idx = pickle.load(f)
+idx_to_label = {idx: label for label, idx in label_to_idx.items()}
 
-num_labels = len(idx_to_label)
-
-model = get_model(device, num_labels)
+model = get_model(device, len(idx_to_label))
 tokenizer = get_tokenizer()
 
 
@@ -28,10 +27,11 @@ async def get_ner(request: NERRequest):
     tokens_all, labels_all = [], []
 
     for chunk in chunked_text(request.text):
-        tokens, res = inference(chunk, model, tokenizer, device)
-        decoded_labels = [idx_to_label[label] for label in res]
-        tokens_all.extend(tokens)
-        labels_all.extend(decoded_labels)
+        res = inference(chunk, model, tokenizer, idx_to_label, device)
+        for token, label in res:
+        #decoded_labels = [idx_to_label[label] for label in res]
+            tokens_all.append(token)
+            labels_all.append(label)
 
     return NERResponse(tokens=tokens_all, labels=labels_all)
 
