@@ -1,5 +1,11 @@
 import streamlit as st
 import requests
+import sys
+import os
+# Add the scripts directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'scripts')))
+
+from masking import mask, demask
 
 # Title of the application
 st.title("Audio Transcription App")
@@ -17,6 +23,23 @@ def transcribe_audio(file):
     else:
         return f"Error: {response.status_code} - {response.text}"
 
+def summarize(ner_result):
+    masked_text, key = mask([ner_result])
+    
+    url = "http://localhost:8000/chat"
+
+    data = {
+        "query": masked_text
+    }
+    response = requests.post(url,json=data)
+    if response.status_code == 200:
+        response_data = response.json()
+        summary = response_data.get('content', '')
+        
+        return demask(summary, key)[0]
+    else:
+        st.error(f"Error: {response.status_code} - {response.text}")
+        return None
 # Button to trigger transcription
 if st.button("Transcribe"):
     if uploaded_file is not None:

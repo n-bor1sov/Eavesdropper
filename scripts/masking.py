@@ -1,6 +1,5 @@
 import hashlib
 import random
-import re
 from faker import Faker
 
 def get_hash_seed(text):
@@ -62,9 +61,9 @@ def create_mask(entity_group, text, seed=None):
     fake = Faker()
     
     entity_group_functions = {
-        'ORG': lambda: create_fake_company(text),
-        'PERSON': lambda: fake.name(),
-        'GEO': lambda: create_fake_geolocation(text)
+        'B-org': lambda: create_fake_company(text),
+        'B-per': lambda: fake.name(),
+        'B-geo': lambda: create_fake_geolocation(text)
         }
     
     return entity_group_functions.get(entity_group, lambda: None)()
@@ -83,17 +82,25 @@ def mask(predictions, reproducible=True):
     """
     new_texts, key_dicts = [], []
     for prediction in predictions:
-        new_text = prediction['text']
+        tokens = prediction['tokens']
+        labels = prediction['labels']
+        new_tokens = tokens.copy()
         key_dict = {}
-        seed = get_hash_seed(new_text) if reproducible else None
+        seed = get_hash_seed(' '.join(tokens)) if reproducible else None
         
-        for entity in prediction.get('entities', []):
-            original = entity['word']
-            if original not in key_dict:
-                mask_value = create_mask(entity['entity_group'], original, seed)
-                new_text = new_text.replace(original, mask_value)
-                key_dict[original] = mask_value
+        i = 0
+        for i in range(len(labels)):
+            if labels[i].startswith('B-'):
+                entity_group = labels[i]
+                original_entity = tokens[i]
+                if original_entity not in key_dict:
+                    mask_value = create_mask(entity_group, original_entity, seed)
+                    key_dict[original_entity] = mask_value
+                
+                # Replace the original entity with the mask value
+                new_tokens[i] = key_dict[original_entity]
         
+        new_text = ' '.join(new_tokens)
         new_texts.append(new_text)
         key_dicts.append(key_dict)
     
@@ -121,32 +128,93 @@ def demask(new_texts, key_dicts):
     return demasked_texts
 
 # Sample data
-sample = [
-    {
-        "text": "John Doe opened the first 'ABC Stores' in New York City on 10/15/2004, and by the end of the year, 15 more stores were launched.\n\nOn 04/13/2023, ABC Stores expanded to Los Angeles, California, opening 15 stores in the first half of the year.\n\nOn 07/02/2013, ABC Stores celebrated the opening of its 25th store in London.",
-        "entities": [
-            {"entity_group": "PERSON", "word": "John Doe", "start": 0, "end": 8},
-            {"entity_group": "ORG", "word": "ABC Stores", "start": 25, "end": 35},
-            {"entity_group": "GEO", "word": "New York City", "start": 49, "end": 63},
-            {"entity_group": "GEO", "word": "Los Angeles, California", "start": 232, "end": 258},
-            {"entity_group": "GEO", "word": "London", "start": 388, "end": 395}
-        ]
-    }
-]
+# sample = [{ 
+#   "tokens": [ 
+#     "I", 
+#     "'", 
+#     "m", 
+#     "AmirBikineyev", 
+#     ".", 
+#     "I", 
+#     "liv 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "B-geo", 
+#     "O", 
+#     "B-geo", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "B-geo" 
+#   ] 
+# }]
 
-# Mask and demask the sample data
-new_texts, key_dicts = mask(sample)
-print('Original:')
-print(sample[0]['text'])
-print()
+# # Mask and demask the sample data
+# new_texts, key_dicts = mask(sample)
+# print('Original:')
+# print(' '.join(sample[0]['tokens']))
+# print()
 
-print('Masked:')
-print(new_texts[0])
-print()
+# print('Masked:')
+# print(new_texts[0])
+# print()
 
-print('*' * 50)
+# print('*' * 50)
 
-demasked_texts = demask(new_texts, key_dicts)
-for old_text, new_text in zip(sample, demasked_texts):
-    print('Original and demasked texts are identical:', old_text['text'] == new_text)
+# demasked_texts = demask(new_texts, key_dicts)
+# print(demasked_texts[0])e", 
+#     "in", 
+#     "Almaty", 
+#     "in", 
+#     "Kazakhstan", 
+#     ".", 
+#     "But", 
+#     "the", 
+#     "I", 
+#     "moved", 
+#     "to", 
+#     "Russia" 
+#   ], 
+#   "labels": [ 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "B-per", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "B-geo", 
+#     "O", 
+#     "B-geo", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "O", 
+#     "B-geo" 
+#   ] 
+# }]
+
+# # Mask and demask the sample data
+# new_texts, key_dicts = mask(sample)
+# print('Original:')
+# print(' '.join(sample[0]['tokens']))
+# print()
+
+# print('Masked:')
+# print(new_texts[0])
+# print()
+
+# print('*' * 50)
+
+# demasked_texts = demask(new_texts, key_dicts)
+# print(demasked_texts[0])
+# # for old_text, new_text in zip(sample, demasked_texts):
+# #     print('Original and demasked texts are identical:', old_text['text'] == new_text)
 		
